@@ -4,16 +4,18 @@ import java.time.Year;
 import java.time.MonthDay;
 
 public class Employee {
-	
+
 	private boolean isForeigner;
-	private EmployeeData employeeData;
+    private EmployeeData employeeData;
+    private Grade grade;
     private int monthlySalary;
     private int otherMonthlyIncome;
     private int annualDeductible;
     private FamilyData familyData;
-	
-	public Employee(EmployeeData employeeData) {
+
+    public Employee(EmployeeData employeeData, Grade grade) {
         this.employeeData = employeeData;
+        this.grade = grade;
         this.familyData = new FamilyData();
     }
 	
