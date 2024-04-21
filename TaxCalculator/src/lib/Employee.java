@@ -5,7 +5,6 @@ import java.time.MonthDay;
 
 public class Employee {
 
-	private boolean isForeigner;
     private EmployeeData employeeData;
     private Grade grade;
     private int monthlySalary;
@@ -24,24 +23,10 @@ public class Employee {
 	 * Jika pegawai adalah warga negara asing gaji bulanan diperbesar sebanyak 50%
 	 */
 	
-	public void setMonthlySalary(int grade) {	
-		if (grade == 1) {
-			monthlySalary = 3000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}else if (grade == 2) {
-			monthlySalary = 5000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}else if (grade == 3) {
-			monthlySalary = 7000000;
-			if (isForeigner) {
-				monthlySalary = (int) (3000000 * 1.5);
-			}
-		}
-	}
+	 public void setMonthlySalary() {
+        int baseSalary = getBaseSalaryByGrade(grade);
+        monthlySalary = employeeData.isForeigner() ? (int) (baseSalary * 1.5) : baseSalary;
+    }
 	
 	public void setAnnualDeductible(int deductible) {
         this.annualDeductible = deductible;
@@ -77,5 +62,18 @@ public class Employee {
             monthsWorked = 12;
         }
         return monthsWorked;
+    }
+
+	private int getBaseSalaryByGrade(Grade grade) {
+        switch (grade) {
+            case GRADE_1:
+                return 3000000;
+            case GRADE_2:
+                return 5000000;
+            case GRADE_3:
+                return 7000000;
+            default:
+                throw new IllegalArgumentException("Invalid grade");
+        }
     }
 }
